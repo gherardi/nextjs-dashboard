@@ -8,7 +8,17 @@ import { lusitana } from '@/app/ui/fonts';
 // 	fetchCardData,
 // } from '@/app/lib/data';
 import { Suspense } from 'react';
-import { RevenueChartSkeleton, LatestInvoicesSkeleton, CardsSkeleton } from '@/app/ui/skeletons';
+import {
+	RevenueChartSkeleton,
+	LatestInvoicesSkeleton,
+	CardsSkeleton,
+} from '@/app/ui/skeletons';
+
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Dashboard',
+};
 
 export default function Page() {
 	// await new Promise((resolve) => setTimeout(resolve, 4000));
@@ -36,20 +46,20 @@ export default function Page() {
           value={numberOfCustomers}
           type="customers"
         /> */}
-				{/* <Suspense fallback={<CardsSkeleton />}> */}
+				<Suspense fallback={<CardsSkeleton />}>
 					{/* questo singolo fa bloccare tutta la pagina */}
-          <CardWrapper />
-        {/* </Suspense> */}
+					<CardWrapper />
+				</Suspense>
 			</div>
 			<div className='mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8'>
 				{/* <RevenueChart revenue={revenue} /> */}
-				{/* <Suspense fallback={<RevenueChartSkeleton />}> */}
-          <RevenueChart />
-        {/* </Suspense> */}
+				<Suspense fallback={<RevenueChartSkeleton />}>
+					<RevenueChart />
+				</Suspense>
 				{/* <LatestInvoices latestInvoices={LatestInvoicesSkeleton} /> */}
-				{/* <Suspense fallback={<LatestInvoicesSkeleton />}> */}
-          <LatestInvoices />
-        {/* </Suspense> */}
+				<Suspense fallback={<LatestInvoicesSkeleton />}>
+					<LatestInvoices />
+				</Suspense>
 			</div>
 		</main>
 	);
